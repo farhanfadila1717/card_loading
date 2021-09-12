@@ -15,20 +15,59 @@ class CardLoading extends StatefulWidget {
     this.curve = Curves.easeInOutSine,
   }) : super(key: key);
 
+  /// height will be the size of [CardLoading]
+  /// and this parameter is required
   final double height;
+
+  /// width will be the size of [CardLoading]
+  /// by default width will be [double.maxInfinite]
   final double? width;
+
+  /// the class that is used to describe the padding dimensions.
+  /// by default padding will be [EdgeInsets.zero]
   final EdgeInsets? padding;
+
+  /// A radius for either circular or elliptical shapes.
+  /// by default borderRadius is 15
   final double borderRadius;
+
+  /// animationDuration will be the duration of the animation duration
+  /// from [Offset] (0, 0) to [Offset] (0, 1)
+  /// default [animationDuration] is 750 milliseconds
   final Duration animationDuration;
+
+  /// at the beginning this will be the [Color] for the background [CardLoading]
+  /// default Color(0xFFF0F0F0)
   final Color colorOne;
+
+  /// at the beginning this will be the [Color] for the Loading [CardLoading]
+  /// default Color(0xFFF0F0F0)
   final Color colorTwo;
+
+  // An parametric animation easing curve, i.e. a mapping of the unit interval to
+  /// the unit interval.
+  ///
+  /// Easing curves are used to adjust the rate of change of an animation over
+  /// time, allowing them to speed up and slow down, rather than moving at a
+  /// constant rate.
+  ///
+  /// A [Curve] must map t=0.0 to 0.0 and t=1.0 to 1.0.
+  ///
+  /// See also:
+  ///
+  ///  * [Curves], a collection of common animation easing curves.
+  ///  * [CurveTween], which can be used to apply a [Curve] to an [Animation].
+  ///  * [Canvas.drawArc], which draws an arc, and has nothing to do with easing
+  ///    curves.
+  ///  * [Animatable], for a more flexible interface that maps fractions to
+  ///    arbitrary values.
   final Curve curve;
 
   @override
-  _LoadingCardState createState() => _LoadingCardState();
+  _CardLoadingState createState() => _CardLoadingState();
 }
 
-class _LoadingCardState extends State<CardLoading>
+class _CardLoadingState extends State<CardLoading>
     with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _animation;
@@ -78,6 +117,8 @@ class _LoadingCardState extends State<CardLoading>
         CurvedAnimation(parent: _animationController, curve: widget.curve);
   }
 
+  /// this function will reverse the colors of colorOne and colorTwo
+  /// to swap with each other, every time the animation is complete
   void reverseColor() {
     if (_isBackgroundOnTop) {
       _backgroudColor = widget.colorTwo;
@@ -102,21 +143,19 @@ class _LoadingCardState extends State<CardLoading>
     return Padding(
       key: widget.key,
       padding: widget.padding ?? EdgeInsets.zero,
-      child: ClipRRect(
-        borderRadius: BorderRadius.all(Radius.circular(widget.borderRadius)),
-        child: AnimatedBuilder(
-          animation: _animationController,
-          builder: (context, snapshot) {
-            return CustomPaint(
-              painter: CardLoadingPainter(
-                colorOne: _loadingColor,
-                colorTwo: _backgroudColor,
-                progress: _animation.value,
-              ),
-              size: Size(widget.width ?? double.maxFinite, widget.height),
-            );
-          },
-        ),
+      child: AnimatedBuilder(
+        animation: _animationController,
+        builder: (context, snapshot) {
+          return CustomPaint(
+            painter: CardLoadingPainter(
+              colorOne: _loadingColor,
+              colorTwo: _backgroudColor,
+              progress: _animation.value,
+              borderRadius: widget.borderRadius,
+            ),
+            size: Size(widget.width ?? double.maxFinite, widget.height),
+          );
+        },
       ),
     );
   }
