@@ -20,39 +20,48 @@ class ExampleCardLoading extends StatelessWidget {
   const ExampleCardLoading({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    final Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        title: Text("Card Loading"),
-        backgroundColor: Colors.black,
-        brightness: Brightness.dark,
+        title: const Text("My Space"),
       ),
-      body: ListView.builder(
-        padding: const EdgeInsets.all(20),
-        itemCount: 3,
-        itemBuilder: (BuildContext context, int index) {
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              CardLoading(
-                height: 30,
-                width: size.width * .2,
-                padding: const EdgeInsets.only(bottom: 10),
-                borderRadius: 15,
+      body: CustomScrollView(
+        slivers: [
+          SliverPadding(
+            padding: const EdgeInsets.all(20),
+            sliver: SliverList(
+              delegate: SliverChildBuilderDelegate(
+                (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 20),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: const [
+                        CardLoading(
+                          height: 30,
+                          borderRadius: 15,
+                          width: 100,
+                          padding: EdgeInsets.only(bottom: 10),
+                        ),
+                        CardLoading(
+                          height: 100,
+                          borderRadius: 15,
+                          padding: EdgeInsets.only(bottom: 10),
+                        ),
+                        CardLoading(
+                          height: 30,
+                          width: 200,
+                          borderRadius: 15,
+                          padding: EdgeInsets.only(bottom: 10),
+                        ),
+                      ],
+                    ),
+                  );
+                },
+                childCount: 10,
               ),
-              CardLoading(
-                height: size.height * .15,
-                padding: const EdgeInsets.only(bottom: 10),
-                borderRadius: 15,
-              ),
-              CardLoading(
-                height: size.height * .1,
-                padding: const EdgeInsets.only(bottom: 20),
-                borderRadius: 15,
-              ),
-            ],
-          );
-        },
+            ),
+          ),
+        ],
       ),
     );
   }
