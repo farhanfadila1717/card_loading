@@ -7,13 +7,11 @@ class CardLoadingPainter extends CustomPainter {
   final Color colorOne;
   final Color colorTwo;
   final double progress;
-  final double borderRadius;
 
   const CardLoadingPainter({
     required this.colorOne,
     required this.colorTwo,
     required this.progress,
-    required this.borderRadius,
   });
 
   @override
@@ -21,21 +19,20 @@ class CardLoadingPainter extends CustomPainter {
     final height = size.height;
     final width = size.width;
     var paintBackground = Paint()..color = colorOne;
-
-    var paint = Paint()..color = colorTwo;
-    var path = Path()
+    var pathBackground = Path()
       ..lineTo(0, height)
       ..lineTo(width, height)
       ..lineTo(width, 0)
       ..close();
 
-    RRect rrectBackgorund = RRect.fromRectAndRadius(
-      Rect.fromCenter(
-          center: Offset(width / 2, height / 2), width: width, height: height),
-      Radius.circular(borderRadius),
-    );
+    var paint = Paint()..color = colorTwo;
+    var path = Path()
+      ..lineTo(0, height)
+      ..lineTo(width * progress, height)
+      ..lineTo(width * progress, 0)
+      ..close();
 
-    canvas.drawRRect(rrectBackgorund, paintBackground);
+    canvas.drawPath(pathBackground, paintBackground);
     canvas.drawPath(path, paint);
   }
 

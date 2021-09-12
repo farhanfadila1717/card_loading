@@ -143,19 +143,21 @@ class _CardLoadingState extends State<CardLoading>
     return Padding(
       key: widget.key,
       padding: widget.padding ?? EdgeInsets.zero,
-      child: AnimatedBuilder(
-        animation: _animationController,
-        builder: (context, snapshot) {
-          return CustomPaint(
-            painter: CardLoadingPainter(
-              colorOne: _loadingColor,
-              colorTwo: _backgroudColor,
-              progress: _animation.value,
-              borderRadius: widget.borderRadius,
-            ),
-            size: Size(widget.width ?? double.maxFinite, widget.height),
-          );
-        },
+      child: ClipRRect(
+        borderRadius: BorderRadius.all(Radius.circular(widget.borderRadius)),
+        child: AnimatedBuilder(
+          animation: _animationController,
+          builder: (context, snapshot) {
+            return CustomPaint(
+              painter: CardLoadingPainter(
+                colorOne: _loadingColor,
+                colorTwo: _backgroudColor,
+                progress: _animation.value,
+              ),
+              size: Size(widget.width ?? double.maxFinite, widget.height),
+            );
+          },
+        ),
       ),
     );
   }
