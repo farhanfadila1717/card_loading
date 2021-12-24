@@ -1,6 +1,10 @@
-## 0.0.1
-
-* First release on pub.dev.
+## 0.1.0
+* add: CardLoadingTheme, New Animation
+* depercared: property colorOne, colorTwo to (CardLoadingTheme)
+* change: property pading to margin, example
 
 ## 0.0.2
-* Add documentation
+* add: documentation
+
+## 0.0.1
+* First release on pub.dev.
