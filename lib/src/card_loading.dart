@@ -1,18 +1,25 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 part 'card_loading_painter.dart';
+part 'card_loading_theme.dart';
 
 class CardLoading extends StatefulWidget {
   const CardLoading({
     Key? key,
     required this.height,
     this.width,
-    this.padding,
+    this.margin,
     this.borderRadius = 10,
     this.animationDuration = const Duration(milliseconds: 750),
-    this.colorOne = const Color(0xFFE5E5E5),
-    this.colorTwo = const Color(0xFFF0F0F0),
+    this.animationDurationTwo = const Duration(milliseconds: 450),
+    @Deprecated("This is no longer used, use CardLoadingTheme")
+        this.colorOne = const Color(0xFFE5E5E5),
+    @Deprecated("This is no longer used, use CardLoadingTheme")
+        this.colorTwo = const Color(0xFFF0F0F0),
+    this.cardLoadingTheme = const CardLoadingTheme(),
     this.curve = Curves.easeInOutSine,
+    this.withChangeDuration = true,
   }) : super(key: key);
 
   /// height will be the size of [CardLoading]
@@ -24,17 +31,25 @@ class CardLoading extends StatefulWidget {
   final double? width;
 
   /// the class that is used to describe the padding dimensions.
-  /// by default padding will be [EdgeInsets.zero]
-  final EdgeInsets? padding;
+  /// by default margin will be [EdgeInsets.zero]
+  final EdgeInsets? margin;
 
   /// A radius for either circular or elliptical shapes.
   /// by default borderRadius is 15
   final double borderRadius;
 
+  /// this will be the difference in [animationDuration] between [colorOne] and [colorTwo]
+  /// if you don't want duration difference in animation duration change this property to false
+  final bool withChangeDuration;
+
   /// animationDuration will be the duration of the animation duration
   /// from [Offset] (0, 0) to [Offset] (0, 1)
   /// default [animationDuration] is 750 milliseconds
   final Duration animationDuration;
+
+  /// this will be the default duration of the second animation,
+  /// if you change the [animationDuration], it is highly recommended to adjust this property
+  final Duration animationDurationTwo;
 
   /// at the beginning this will be the [Color] for the background [CardLoading]
   /// default Color(0xFFF0F0F0)
@@ -43,6 +58,8 @@ class CardLoading extends StatefulWidget {
   /// at the beginning this will be the [Color] for the Loading [CardLoading]
   /// default Color(0xFFF0F0F0)
   final Color colorTwo;
+
+  final CardLoadingTheme cardLoadingTheme;
 
   // An parametric animation easing curve, i.e. a mapping of the unit interval to
   /// the unit interval.
@@ -85,6 +102,7 @@ class _CardLoadingState extends State<CardLoading>
               if (mounted) {
                 if (_animationController.isCompleted) {
                   reverseColor();
+                  changeDuration();
                   _animationController.reset();
                   _animationController.forward();
                 }
@@ -92,19 +110,17 @@ class _CardLoadingState extends State<CardLoading>
             },
           );
     _initAnimation();
-    _backgroudColor = widget.colorTwo;
-    _loadingColor = widget.colorOne;
+    _backgroudColor = widget.cardLoadingTheme.colorOne;
+    _loadingColor = widget.cardLoadingTheme.colorTwo;
     _animationController.forward();
   }
 
   @override
   void didUpdateWidget(covariant CardLoading oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (oldWidget.colorOne != widget.colorOne) {
-      _loadingColor = widget.colorOne;
-    }
-    if (oldWidget.colorTwo != widget.colorTwo) {
-      _backgroudColor = widget.colorTwo;
+    if (oldWidget.cardLoadingTheme != widget.cardLoadingTheme) {
+      _loadingColor = widget.cardLoadingTheme.colorOne;
+      _backgroudColor = widget.cardLoadingTheme.colorTwo;
     }
     if ((widget.animationDuration != oldWidget.animationDuration) ||
         (widget.curve != oldWidget.curve)) {
@@ -112,14 +128,15 @@ class _CardLoadingState extends State<CardLoading>
     }
   }
 
-  void _initAnimation() {
-    _animation =
-        CurvedAnimation(parent: _animationController, curve: widget.curve);
+  void _initAnimation({Curve? curve}) {
+    _animation = CurvedAnimation(
+        parent: _animationController, curve: curve ?? widget.curve);
   }
 
   /// this function will reverse the colors of colorOne and colorTwo
   /// to swap with each other, every time the animation is complete
   void reverseColor() {
+    _animationController.reset();
     if (_isBackgroundOnTop) {
       _backgroudColor = widget.colorTwo;
       _loadingColor = widget.colorOne;
@@ -132,6 +149,23 @@ class _CardLoadingState extends State<CardLoading>
     });
   }
 
+  void changeDuration() {
+    if (widget.withChangeDuration) {
+      if (_isBackgroundOnTop) {
+        _animationController.duration = widget.animationDurationTwo;
+      } else {
+        _animationController.duration = widget.animationDuration;
+      }
+    } else {
+      int currentDurationMilliseconds =
+          _animationController.duration?.inMilliseconds ?? 0;
+      int expectDuration = widget.animationDuration.inMilliseconds;
+      if (currentDurationMilliseconds != expectDuration) {
+        _animationController.duration = widget.animationDuration;
+      }
+    }
+  }
+
   @override
   void dispose() {
     _animationController.dispose();
@@ -142,22 +176,20 @@ class _CardLoadingState extends State<CardLoading>
   Widget build(BuildContext context) {
     return Padding(
       key: widget.key,
-      padding: widget.padding ?? EdgeInsets.zero,
-      child: ClipRRect(
-        borderRadius: BorderRadius.all(Radius.circular(widget.borderRadius)),
-        child: AnimatedBuilder(
-          animation: _animationController,
-          builder: (context, snapshot) {
-            return CustomPaint(
-              painter: CardLoadingPainter(
-                colorOne: _loadingColor,
-                colorTwo: _backgroudColor,
-                progress: _animation.value,
-              ),
-              size: Size(widget.width ?? double.maxFinite, widget.height),
-            );
-          },
-        ),
+      padding: widget.margin ?? EdgeInsets.zero,
+      child: AnimatedBuilder(
+        animation: _animationController,
+        builder: (context, snapshot) {
+          return CustomPaint(
+            painter: CardLoadingPainter(
+              colorOne: _loadingColor,
+              colorTwo: _backgroudColor,
+              progress: _animation.value,
+              borderRadius: widget.borderRadius,
+            ),
+            size: Size(widget.width ?? double.maxFinite, widget.height),
+          );
+        },
       ),
     );
   }
