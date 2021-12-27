@@ -1,3 +1,6 @@
+## 0.1.1
+* fix: export CardLoadingTheme
+
 ## 0.1.0
 * add: CardLoadingTheme, New Animation
 * depercared: property colorOne, colorTwo to (CardLoadingTheme)
