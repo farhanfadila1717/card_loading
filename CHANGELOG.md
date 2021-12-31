@@ -1,3 +1,6 @@
+## 0.1.2
+* fix: reverse color
+
 ## 0.1.1
 * fix: export CardLoadingTheme
 
