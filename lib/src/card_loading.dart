@@ -138,11 +138,11 @@ class _CardLoadingState extends State<CardLoading>
   void reverseColor() {
     _animationController.reset();
     if (_isBackgroundOnTop) {
-      _backgroudColor = widget.colorTwo;
-      _loadingColor = widget.colorOne;
+      _backgroudColor = widget.cardLoadingTheme.colorTwo;
+      _loadingColor = widget.cardLoadingTheme.colorOne;
     } else {
-      _backgroudColor = widget.colorOne;
-      _loadingColor = widget.colorTwo;
+      _backgroudColor = widget.cardLoadingTheme.colorOne;
+      _loadingColor = widget.cardLoadingTheme.colorTwo;
     }
     setState(() {
       _isBackgroundOnTop = !_isBackgroundOnTop;
