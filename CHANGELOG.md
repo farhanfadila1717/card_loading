@@ -1,3 +1,6 @@
+## 0.1.3
+* fix: Linter
+
 ## 0.1.2
 * fix: reverse color
 
