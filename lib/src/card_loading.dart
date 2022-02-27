@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 part 'card_loading_painter.dart';
@@ -101,8 +100,8 @@ class _CardLoadingState extends State<CardLoading>
             () {
               if (mounted) {
                 if (_animationController.isCompleted) {
-                  reverseColor();
                   changeDuration();
+                  reverseColor();
                   _animationController.reset();
                   _animationController.forward();
                 }
@@ -175,7 +174,6 @@ class _CardLoadingState extends State<CardLoading>
   @override
   Widget build(BuildContext context) {
     return Padding(
-      key: widget.key,
       padding: widget.margin ?? EdgeInsets.zero,
       child: AnimatedBuilder(
         animation: _animationController,
