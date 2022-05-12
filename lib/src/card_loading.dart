@@ -12,10 +12,6 @@ class CardLoading extends StatefulWidget {
     this.borderRadius = 10,
     this.animationDuration = const Duration(milliseconds: 750),
     this.animationDurationTwo = const Duration(milliseconds: 450),
-    @Deprecated("This is no longer used, use CardLoadingTheme")
-        this.colorOne = const Color(0xFFE5E5E5),
-    @Deprecated("This is no longer used, use CardLoadingTheme")
-        this.colorTwo = const Color(0xFFF0F0F0),
     this.cardLoadingTheme = const CardLoadingTheme(),
     this.curve = Curves.easeInOutSine,
     this.withChangeDuration = true,
@@ -50,14 +46,7 @@ class CardLoading extends StatefulWidget {
   /// if you change the [animationDuration], it is highly recommended to adjust this property
   final Duration animationDurationTwo;
 
-  /// at the beginning this will be the [Color] for the background [CardLoading]
-  /// default Color(0xFFF0F0F0)
-  final Color colorOne;
-
-  /// at the beginning this will be the [Color] for the Loading [CardLoading]
-  /// default Color(0xFFF0F0F0)
-  final Color colorTwo;
-
+  /// Custom color cardloading with [CardLoadingTheme] property
   final CardLoadingTheme cardLoadingTheme;
 
   // An parametric animation easing curve, i.e. a mapping of the unit interval to
@@ -88,27 +77,15 @@ class _CardLoadingState extends State<CardLoading>
   late AnimationController _animationController;
   late Animation<double> _animation;
   late Color _backgroudColor, _loadingColor;
-
-  bool _isBackgroundOnTop = false;
+  bool _isBackgroundOnTop = true;
 
   @override
   void initState() {
     super.initState();
     _animationController =
-        AnimationController(vsync: this, duration: widget.animationDuration)
-          ..addListener(
-            () {
-              if (mounted) {
-                if (_animationController.isCompleted) {
-                  changeDuration();
-                  reverseColor();
-                  _animationController.reset();
-                  _animationController.forward();
-                }
-              }
-            },
-          );
-    _initAnimation();
+        AnimationController(vsync: this, duration: widget.animationDuration);
+    initAnimation();
+    listenAnimation();
     _backgroudColor = widget.cardLoadingTheme.colorOne;
     _loadingColor = widget.cardLoadingTheme.colorTwo;
     _animationController.forward();
@@ -123,25 +100,37 @@ class _CardLoadingState extends State<CardLoading>
     }
     if ((widget.animationDuration != oldWidget.animationDuration) ||
         (widget.curve != oldWidget.curve)) {
-      _initAnimation();
+      initAnimation();
     }
   }
 
-  void _initAnimation({Curve? curve}) {
+  void initAnimation({Curve? curve}) {
     _animation = CurvedAnimation(
         parent: _animationController, curve: curve ?? widget.curve);
+  }
+
+  void listenAnimation() {
+    _animationController.addStatusListener((status) {
+      if (!mounted) return;
+      if (_animationController.isCompleted) {
+        changeDuration();
+        reverseColor();
+        _animationController.reset();
+        _animationController.forward();
+      }
+    });
   }
 
   /// this function will reverse the colors of colorOne and colorTwo
   /// to swap with each other, every time the animation is complete
   void reverseColor() {
-    _animationController.reset();
+    final theme = widget.cardLoadingTheme;
     if (_isBackgroundOnTop) {
-      _backgroudColor = widget.cardLoadingTheme.colorTwo;
-      _loadingColor = widget.cardLoadingTheme.colorOne;
+      _backgroudColor = theme.colorTwo;
+      _loadingColor = theme.colorOne;
     } else {
-      _backgroudColor = widget.cardLoadingTheme.colorOne;
-      _loadingColor = widget.cardLoadingTheme.colorTwo;
+      _backgroudColor = theme.colorOne;
+      _loadingColor = theme.colorTwo;
     }
     setState(() {
       _isBackgroundOnTop = !_isBackgroundOnTop;
