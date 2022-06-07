@@ -9,7 +9,7 @@ class CardLoading extends StatefulWidget {
     required this.height,
     this.width,
     this.margin,
-    this.borderRadius = 10,
+    this.borderRadius,
     this.animationDuration = const Duration(milliseconds: 750),
     this.animationDurationTwo = const Duration(milliseconds: 450),
     this.cardLoadingTheme = const CardLoadingTheme(),
@@ -30,8 +30,8 @@ class CardLoading extends StatefulWidget {
   final EdgeInsets? margin;
 
   /// A radius for either circular or elliptical shapes.
-  /// by default borderRadius is 15
-  final double borderRadius;
+  /// by default borderRadius is null
+  final double? borderRadius;
 
   /// this will be the difference in [animationDuration] between [colorOne] and [colorTwo]
   /// if you don't want duration difference in animation duration change this property to false
@@ -49,7 +49,7 @@ class CardLoading extends StatefulWidget {
   /// Custom color cardloading with [CardLoadingTheme] property
   final CardLoadingTheme cardLoadingTheme;
 
-  // An parametric animation easing curve, i.e. a mapping of the unit interval to
+  /// An parametric animation easing curve, i.e. a mapping of the unit interval to
   /// the unit interval.
   ///
   /// Easing curves are used to adjust the rate of change of an animation over
