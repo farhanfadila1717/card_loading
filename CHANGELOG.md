@@ -1,3 +1,7 @@
+## 0.1.5
+* Added: golden test `CardLoadingPainter`
+* fix: Clip `CardLoadingPainter` when borderRadius is Zero
+
 ## 0.1.4
 * fix: First reverse color
 
