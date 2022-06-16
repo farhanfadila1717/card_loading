@@ -1,19 +1,23 @@
 name: Test project in a PR
-on: [pull_request]
+on: 
+  pull_request:
+    branches:
+      - master
+      
 jobs: 
-  test_linux:
+  flutter_test:
+    name: Run flutter test and analyze
     runs-on: ubuntu-latest
     steps:
       # Checkout the PR branch
       - uses: actions/checkout@v3
-
       # Setup Flutter environment
       - uses: subosito/flutter-action@v2
         with:
           channel: "stable"
-
       # Download all the packages that the app uses
       - run: flutter pub get
-
+      # Run Flutter analyze 
+      - run: flutter analyze
       # Run all tests
       - run: flutter test
