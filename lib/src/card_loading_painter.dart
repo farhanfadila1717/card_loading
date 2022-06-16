@@ -3,6 +3,8 @@ part of 'card_loading.dart';
 /// [CardLoadingPainter] is a [CustomPainter]
 /// that will draw every time there is an
 /// update of the animation on [CardLoading].
+/// colorOne Color for background
+/// colorTwo Color for progress Rectangle
 class CardLoadingPainter extends CustomPainter {
   final Color colorOne;
   final Color colorTwo;
@@ -35,6 +37,8 @@ class CardLoadingPainter extends CustomPainter {
       ..lineTo(width * progress, 0)
       ..close();
 
+    // When borderRadius is'nt null and greather than 0
+    // canvas will clipped
     if (borderRadius != null && borderRadius! > 0) {
       final rRect = RRect.fromRectAndRadius(
         Rect.fromLTRB(0, 0, width, height),
@@ -48,5 +52,9 @@ class CardLoadingPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
+  bool shouldRepaint(covariant CardLoadingPainter oldDelegate) =>
+      progress != oldDelegate.progress ||
+      borderRadius != oldDelegate.borderRadius ||
+      colorOne != oldDelegate.colorOne ||
+      colorTwo != oldDelegate.colorTwo;
 }
