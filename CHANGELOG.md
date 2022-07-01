@@ -1,3 +1,6 @@
+## 0.2.0
+* Changed: borderRadius property type from `double` to `BorderRadius`
+
 ## 0.1.5
 * Added: golden test `CardLoadingPainter`
 * fix: Clip `CardLoadingPainter` when borderRadius is Zero
