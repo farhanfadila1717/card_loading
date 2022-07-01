@@ -31,7 +31,7 @@ class CardLoading extends StatefulWidget {
 
   /// A radius for either circular or elliptical shapes.
   /// by default borderRadius is null
-  final double? borderRadius;
+  final BorderRadius? borderRadius;
 
   /// this will be the difference in [animationDuration] between [colorOne] and [colorTwo]
   /// if you don't want duration difference in animation duration change this property to false

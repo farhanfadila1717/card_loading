@@ -19,7 +19,7 @@ void main() {
         painter: CardLoadingPainter(
           colorOne: theme.colorOne,
           colorTwo: theme.colorTwo,
-          borderRadius: 10,
+          borderRadius: BorderRadius.all(Radius.circular(10)),
           progress: progress,
         ),
       ),

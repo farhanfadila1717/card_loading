@@ -9,7 +9,7 @@ class CardLoadingPainter extends CustomPainter {
   final Color colorOne;
   final Color colorTwo;
   final double progress;
-  final double? borderRadius;
+  final BorderRadius? borderRadius;
 
   const CardLoadingPainter({
     required this.colorOne,
@@ -39,13 +39,10 @@ class CardLoadingPainter extends CustomPainter {
 
     // When borderRadius is'nt null and greather than 0
     // canvas will clipped
-    if (borderRadius != null && borderRadius! > 0) {
-      final rRect = RRect.fromRectAndRadius(
-        Rect.fromLTRB(0, 0, width, height),
-        Radius.circular(borderRadius!),
-      );
+    if (borderRadius != null) {
+      final rect = Rect.fromLTRB(0, 0, width, height);
 
-      canvas.clipRRect(rRect);
+      canvas.clipRRect(borderRadius!.toRRect(rect));
     }
     canvas.drawPath(pathBackground, paintBackground);
     canvas.drawPath(path, paint);
