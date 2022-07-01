@@ -1,3 +1,6 @@
+## 0.2.1
+* Update example in `README` 
+
 ## 0.2.0
 * Changed: borderRadius property type from `double` to `BorderRadius`
 
