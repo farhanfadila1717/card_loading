@@ -38,19 +38,19 @@ class ExampleCardLoading extends StatelessWidget {
                       children: const [
                         CardLoading(
                           height: 30,
-                          borderRadius: 15,
+                          borderRadius: BorderRadius.all(Radius.circular(15)),
                           width: 100,
                           margin: EdgeInsets.only(bottom: 10),
                         ),
                         CardLoading(
                           height: 100,
-                          borderRadius: 15,
+                          borderRadius: BorderRadius.all(Radius.circular(15)),
                           margin: EdgeInsets.only(bottom: 10),
                         ),
                         CardLoading(
                           height: 30,
                           width: 200,
-                          borderRadius: 15,
+                          borderRadius: BorderRadius.all(Radius.circular(15)),
                           margin: EdgeInsets.only(bottom: 10),
                         ),
                       ],
