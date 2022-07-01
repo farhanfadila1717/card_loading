@@ -8,11 +8,11 @@ A Flutter package to create easy create loading card between two colors
 ```dart
 CardLoading(
   height: 100,
-  borderRadius: 15,
+  borderRadius: BorderRadius.all(Radius.circular(10)),
   margin: EdgeInsets.only(bottom: 10),
 ),
 ```
-### Output Example
+### Output
 [![output][]][output]
 
 ---
