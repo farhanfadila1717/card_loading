@@ -2,6 +2,8 @@ import 'package:card_loading/src/card_loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import 'extensions.dart';
+
 void main() {
   const key = Key('box_key');
   const theme = CardLoadingTheme();
@@ -33,7 +35,7 @@ void main() {
 
       await expectLater(
         find.byKey(key),
-        matchesGoldenFile('progress_zero.jpg'),
+        matchesGoldenFile('golden/progress_zero.jpg'),
       );
     });
 
@@ -43,7 +45,7 @@ void main() {
 
       await expectLater(
         find.byKey(key),
-        matchesGoldenFile('progress_half.jpg'),
+        matchesGoldenFile('golden/progress_half.jpg'),
       );
     });
 
@@ -53,21 +55,8 @@ void main() {
 
       await expectLater(
         find.byKey(key),
-        matchesGoldenFile('progress_full.jpg'),
+        matchesGoldenFile('golden/progress_full.jpg'),
       );
     });
   });
-}
-
-extension SetScreenSize on WidgetTester {
-  Future<void> setScreenSize({
-    double width = 150,
-    double height = 100,
-    double pixelDensity = 1,
-  }) async {
-    final size = Size(width, height);
-    await this.binding.setSurfaceSize(size);
-    this.binding.window.physicalSizeTestValue = size;
-    this.binding.window.devicePixelRatioTestValue = pixelDensity;
-  }
 }

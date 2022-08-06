@@ -8,6 +8,7 @@ class CardLoading extends StatefulWidget {
     Key? key,
     required this.height,
     this.width,
+    this.child,
     this.margin,
     this.borderRadius,
     this.animationDuration = const Duration(milliseconds: 750),
@@ -28,6 +29,9 @@ class CardLoading extends StatefulWidget {
   /// the class that is used to describe the padding dimensions.
   /// by default margin will be [EdgeInsets.zero]
   final EdgeInsets? margin;
+
+  /// The widget below this widget in the tree.
+  final Widget? child;
 
   /// A radius for either circular or elliptical shapes.
   /// by default borderRadius is null
@@ -175,6 +179,7 @@ class _CardLoadingState extends State<CardLoading>
               borderRadius: widget.borderRadius,
             ),
             size: Size(widget.width ?? double.maxFinite, widget.height),
+            child: widget.child,
           );
         },
       ),

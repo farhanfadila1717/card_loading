@@ -1,3 +1,6 @@
+## 0.2.2
+* `CardLoading` Added `child` property 
+
 ## 0.2.1
 * Update example in `README` 
 
