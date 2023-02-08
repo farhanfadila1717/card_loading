@@ -1,3 +1,6 @@
+## 0.3.0
+* bump min dart sdk to `2.17.0`
+
 ## 0.2.2
 * `CardLoading` Added `child` property 
 
