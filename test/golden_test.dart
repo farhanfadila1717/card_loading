@@ -6,7 +6,7 @@ import 'extensions.dart';
 
 void main() {
   const key = Key('box_key');
-  const theme = CardLoadingTheme();
+  const theme = CardLoadingTheme.defaultTheme;
 
   Widget buildSubject(double progress) {
     return Container(
