@@ -3,7 +3,24 @@ import 'package:flutter/material.dart';
 part 'card_loading_painter.dart';
 part 'card_loading_theme.dart';
 
+/// {@template card_loading}
+/// The `CardLoading` widget is used to create an easy animation
+/// between two colors.
+/// Example usage:
+///
+/// ```dart
+/// CardLoading(
+///   height: 100,
+///   animationDuration: Duration(milliseconds: 500),
+///   cardLoadingTheme: CardLoadingTheme(
+///     colorOne: Colors.blue,
+///     colorTwo: Colors.lightBlue,
+///   ),
+/// )
+/// ```
+/// {@endtemplate}
 class CardLoading extends StatefulWidget {
+  /// {@macro card_loading}
   const CardLoading({
     Key? key,
     required this.height,
@@ -13,63 +30,42 @@ class CardLoading extends StatefulWidget {
     this.borderRadius,
     this.animationDuration = const Duration(milliseconds: 750),
     this.animationDurationTwo = const Duration(milliseconds: 450),
-    this.cardLoadingTheme = const CardLoadingTheme(),
+    this.cardLoadingTheme = CardLoadingTheme.defaultTheme,
     this.curve = Curves.easeInOutSine,
     this.withChangeDuration = true,
   }) : super(key: key);
 
-  /// height will be the size of [CardLoading]
-  /// and this parameter is required
+  /// `height` is the height of the `CardLoading` widget and is required.
   final double height;
 
-  /// width will be the size of [CardLoading]
-  /// by default width will be [double.maxInfinite]
+  /// `width` is the width of the `CardLoading` widget and has a default value of `double.maxInfinite`.
   final double? width;
 
-  /// the class that is used to describe the padding dimensions.
-  /// by default margin will be [EdgeInsets.zero]
+  /// `margin` is the padding around the widget and has a default value of `EdgeInsets.zero`.
   final EdgeInsets? margin;
 
-  /// The widget below this widget in the tree.
+  /// `child` is the widget below the `CardLoading` widget in the widget tree.
   final Widget? child;
 
-  /// A radius for either circular or elliptical shapes.
-  /// by default borderRadius is null
+  /// `borderRadius` is the radius for either circular
+  /// or elliptical shapes and has a default value of `null`.
   final BorderRadius? borderRadius;
 
-  /// this will be the difference in [animationDuration] between [colorOne] and [colorTwo]
-  /// if you don't want duration difference in animation duration change this property to false
+  /// `withChangeDuration` determines if there is a difference in
+  /// the `animationDuration` between `colorOne` and `colorTwo`.
   final bool withChangeDuration;
 
-  /// animationDuration will be the duration of the animation duration
-  /// from [Offset] (0, 0) to [Offset] (0, 1)
-  /// default [animationDuration] is 750 milliseconds
+  /// `animationDuration` is the duration of the animation from
+  /// `Offset` (0, 0) to `Offset` (0, 1) and has a default value of `750 milliseconds`.
   final Duration animationDuration;
 
-  /// this will be the default duration of the second animation,
-  /// if you change the [animationDuration], it is highly recommended to adjust this property
+  /// `animationDurationTwo` is the duration of the second animation and has a default value of `450 milliseconds`.
   final Duration animationDurationTwo;
 
-  /// Custom color cardloading with [CardLoadingTheme] property
+  /// `CardLoadingTheme` is used to set the custom color for the `CardLoading` widget.
   final CardLoadingTheme cardLoadingTheme;
 
-  /// An parametric animation easing curve, i.e. a mapping of the unit interval to
-  /// the unit interval.
-  ///
-  /// Easing curves are used to adjust the rate of change of an animation over
-  /// time, allowing them to speed up and slow down, rather than moving at a
-  /// constant rate.
-  ///
-  /// A [Curve] must map t=0.0 to 0.0 and t=1.0 to 1.0.
-  ///
-  /// See also:
-  ///
-  ///  * [Curves], a collection of common animation easing curves.
-  ///  * [CurveTween], which can be used to apply a [Curve] to an [Animation].
-  ///  * [Canvas.drawArc], which draws an arc, and has nothing to do with easing
-  ///    curves.
-  ///  * [Animatable], for a more flexible interface that maps fractions to
-  ///    arbitrary values.
+  /// The curve to use in the forward direction.
   final Curve curve;
 
   @override

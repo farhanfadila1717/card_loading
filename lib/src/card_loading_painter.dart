@@ -1,17 +1,21 @@
 part of 'card_loading.dart';
 
+/// {@template card_loading_painter}
 /// [CardLoadingPainter] is a [CustomPainter]
 /// that will draw every time there is an
 /// update of the animation on [CardLoading].
 /// colorOne Color for background
 /// colorTwo Color for progress Rectangle
+/// {@endtemplate}
 class CardLoadingPainter extends CustomPainter {
   final Color colorOne;
   final Color colorTwo;
   final double progress;
   final BorderRadius? borderRadius;
 
+  /// {@macro card_loading_painter}
   const CardLoadingPainter({
+    super.repaint,
     required this.colorOne,
     required this.colorTwo,
     required this.progress,
