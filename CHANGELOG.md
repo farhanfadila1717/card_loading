@@ -1,4 +1,4 @@
-## 0.3.1
+## 0.3.2
 
 - fix readme.md broken image, add paypal qr
 - pubspec.yaml add `issue_tracker`, `topic` & `screenshots`

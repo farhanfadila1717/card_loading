@@ -28,7 +28,7 @@ CardLoading(
 [![account avatar][]][github account] <br>
 **Farhan Fadila**<br>
 📫 How to reach me: farhan.fadila1717@gmail.com<br>
-🛸 Website: [farhanfadila.site](http://farhanfadila.site/)
+🛸 Website: [farhanfadila.site](https://farhanfadila.site/)
 
 ### ❤️ Suport Maintainer
 
