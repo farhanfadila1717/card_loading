@@ -1,10 +1,14 @@
 ## [![cover][]][github]
+
 [![flutter][]][web flutter] [![paypal][]][paypal account] <br>
+[![qr-paypal][]][paypal account]
+<br><br>
 A Flutter package to create easy create loading card between two colors
 
 ---
 
 ## Example
+
 ```dart
 CardLoading(
   height: 100,
@@ -12,21 +16,27 @@ CardLoading(
   margin: EdgeInsets.only(bottom: 10),
 ),
 ```
+
 ### Output
+
 [![output][]][output]
 
 ---
 
-### 🚧 Maintener 
+### 🚧 Maintainer
+
 [![account avatar][]][github account] <br>
 **Farhan Fadila**<br>
-📫 How to reach me: farhan.fadila1717@gmail.com
+📫 How to reach me: farhan.fadila1717@gmail.com<br>
+🛸 Website: [farhanfadila.site](http://farhanfadila.site/)
 
-### ❤️ Suport Maintener
+### ❤️ Suport Maintainer
+
+[![qr-paypal][]][paypal account]<br>
 [![paypal][]][paypal account] [![badge linktree][]][linktree account]
 
-[cover]: https://github.com/farhanfadila1717/flutter_package/blob/master/display/card_loading/card_loading.png
-[output]: https://github.com/farhanfadila1717/flutter_package/blob/master/display/card_loading/output_card_loading.gif
+[cover]: https://raw.githubusercontent.com/farhanfadila1717/flutter_package/master/display/card_loading/card_loading.png
+[output]: https://raw.githubusercontent.com/farhanfadila1717/flutter_package/master/display/card_loading/output_card_loading.gif
 [flutter]: https://img.shields.io/badge/Platform-Flutter-02569B?logo=flutter
 [web flutter]: https://flutter.dev
 [paypal]: https://img.shields.io/badge/Donate-PayPal-00457C?logo=paypal
@@ -36,3 +46,4 @@ CardLoading(
 [badge linktree]: https://img.shields.io/badge/Linktree-farhanfadila-orange
 [linktree account]: https://linktr.ee/farhanfadila
 [github]: https://github.com/farhanfadila1717/card_loading
+[qr-paypal]: https://raw.githubusercontent.com/farhanfadila1717/flutter_package/master/display/qr-paypal.png

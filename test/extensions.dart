@@ -10,7 +10,7 @@ extension SetScreenSize on WidgetTester {
   }) async {
     final size = Size(width, height);
     await this.binding.setSurfaceSize(size);
-    this.binding.window.physicalSizeTestValue = size;
-    this.binding.window.devicePixelRatioTestValue = pixelDensity;
+    view.physicalSize = size;
+    view.devicePixelRatio = pixelDensity;
   }
 }
