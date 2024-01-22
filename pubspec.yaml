@@ -2,10 +2,11 @@ name: card_loading
 description: A Flutter package to create easy create loading card between two colors
 version: 0.3.1
 homepage: https://github.com/farhanfadila1717/card_loading
+issue_tracker: https://github.com/farhanfadila1717/card_loading/issues
 maintener: Farhan Fadila (@farhanfadila1717)
 
 environment:
-  sdk: ">=2.17.0 <3.0.0"
+  sdk: ">=2.17.0 <4.0.0"
   flutter: ">=1.17.0"
 
 dependencies:
@@ -16,4 +17,12 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-flutter:
+screenshots:
+  - description: "Examples of the Card Loading."
+    path: ss.png
+
+topics:
+  - loading
+  - card
+  - shimmer
+  - animation
